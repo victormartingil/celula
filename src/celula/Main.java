@@ -73,23 +73,18 @@ public class Main {
 				switch (tipoCelula) {
 					case 1:
 						Celula procariota = new Procariota();
-						datosProcariota(procariota);
-						return procariota;
+						return datosProcariota(procariota);
 					case 2:
 						Celula eucariota = new Eucariota();
-						datosEucariota(eucariota);
-						return eucariota;
+						return datosEucariota(eucariota);
 					default:
 						System.out.println("Error\n");
 						crearCelula ();	
 				}
 			}catch(NegativeException e) {
 				System.out.println(e.getMessage());
-			}
-			sigue = false;
-			
+			}			
 		}
-		
 		return null;
 	}
 	
