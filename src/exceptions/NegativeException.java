@@ -3,6 +3,6 @@ package exceptions;
 public class NegativeException extends Exception{
 	
 	public NegativeException () {
-		super("El número debe ser positivo");
+		super("El nÃºmero debe ser positivo");
 	}
 }

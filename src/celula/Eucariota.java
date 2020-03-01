@@ -39,7 +39,7 @@ public class Eucariota extends Celula{
         	   "\nMm membrana: " + this.getMmMembrana() + 
         	   "\nDensidad del Citoplasta: " + this.getDensidadCitoplasma() + 
         	   "\nPeso: " + this.getPeso() + 
-        	   "\nTama�o: " + this.getTamanyo() +
+        	   "\nTamaño: " + this.getTamanyo() +
         	   "\nTamaño del Nucleo: " + this.getTamanyoNucleo() + 
         	   "\nNumero de Organulos: " + this.getNumeroOrganulos()+"\n";
     }
