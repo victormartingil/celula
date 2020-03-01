@@ -51,7 +51,7 @@ private double tamanyo;
     }
 
     public String toString() {
-        return "Celula{" + "mmMembrana=" + mmMembrana + ", densidadCitoplasma=" + densidadCitoplasma + ", peso=" + peso + ", tamanyo=" + tamanyo + '}';
+        return null;
     }
 
 

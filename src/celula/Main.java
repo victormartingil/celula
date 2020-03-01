@@ -8,12 +8,11 @@ import exceptions.NegativeException;
 public class Main {
 	
 	public static void main(String[] args) {
-		
-		//ArrayList<Celula> listaCelulas = new ArrayList<>();
-		
+				
+		ArrayList<Celula> listaCelulas = new ArrayList<>();
 		int opcion = elegirOpcion();
 		
-		ejecucion(opcion);		
+		ejecucion(opcion, listaCelulas);		
 	}
 	
 	public static int elegirOpcion() {
@@ -22,30 +21,35 @@ public class Main {
 		System.out.println("Elija una opción:");
 		System.out.println("1 - Crear célula");
 		System.out.println("2 - Mostrar células");
-		System.out.println("3 - Borrar célula");
-		System.out.println("------------------\n");
+		System.out.println("3 - Borrar procariotas");
+		System.out.println("4 - Borrar eucariotas");
+		System.out.println("5 - Salir");
+		System.out.println("------------------");
 		
 		Scanner sc = new Scanner (System.in);
 		int opcion = sc.nextInt();
-		
 		return opcion;
 	}
 	
-	//EJECUCION -> Incluye el ArrayList sobre el que trabajaremos
-	public static void ejecucion (int opcion) {
-		ArrayList<Celula> listaCelulas = new ArrayList<>();
+	//EJECUCION -> Método desde el que trabajaremos el ArrayList Principal
+	public static void ejecucion (int opcion, ArrayList<Celula> listaCelulas) {
 		switch (opcion) {
 		case 1:
 			listaCelulas.add(crearCelula());
-			ejecucion(elegirOpcion());
+			ejecucion(elegirOpcion(), listaCelulas);
 		case 2:
 			mostarCelulas(listaCelulas);
-			ejecucion(elegirOpcion());
+			ejecucion(elegirOpcion(), listaCelulas);
 		case 3:
-			listaCelulas.remove(borrarCelula(listaCelulas)-1);
-			ejecucion(elegirOpcion());
+			borrarProcariotas(listaCelulas);
+			ejecucion(elegirOpcion(), listaCelulas);
+		case 4:
+			borrarEucariotas(listaCelulas);
+			ejecucion(elegirOpcion(), listaCelulas);
+		case 5:
+			System.exit(0);
 		default:
-			ejecucion(elegirOpcion());
+			ejecucion(elegirOpcion(), listaCelulas);
 		}
 	}
 
@@ -59,7 +63,7 @@ public class Main {
 			System.out.println("¿Qué tipo de célula es?");
 			System.out.println("1 - Procariota");
 			System.out.println("2 - Eucariota");
-			System.out.println("------------------\n");
+			System.out.println("------------------");
 			
 			Scanner sc = new Scanner (System.in);
 			try {
@@ -69,11 +73,11 @@ public class Main {
 				switch (tipoCelula) {
 					case 1:
 						Celula procariota = new Procariota();
-						procariota = datosProcariota(procariota);
+						datosProcariota(procariota);
 						return procariota;
 					case 2:
 						Celula eucariota = new Eucariota();
-						eucariota = datosEucariota(eucariota);
+						datosEucariota(eucariota);
 						return eucariota;
 					default:
 						System.out.println("Error\n");
@@ -81,9 +85,11 @@ public class Main {
 				}
 			}catch(NegativeException e) {
 				System.out.println(e.getMessage());
-				crearCelula();
 			}
+			sigue = false;
+			
 		}
+		
 		return null;
 	}
 	
@@ -101,7 +107,6 @@ public class Main {
 				valor = sc.nextDouble();
 				if (valor<0) throw new NegativeException();
 				procariota.setMmMembrana(valor);
-				
 				
 				System.out.println("Dime la densidad de del citoplasma: ");
 				valor = sc.nextDouble();
@@ -181,11 +186,10 @@ public class Main {
 		return eucariota;
 	}
 	
-	public static ArrayList<Celula> mostarCelulas(ArrayList<Celula> listaCelulas) {
+	public static void mostarCelulas(ArrayList<Celula> listaCelulas) {
 		for (Celula element : listaCelulas) {
 			System.out.println(element.toString());
 		}
-		return listaCelulas;
 	}
 	
 	public static int borrarCelula(ArrayList<Celula> listaCelulas) {
@@ -198,8 +202,27 @@ public class Main {
 		
 		Scanner sc = new Scanner (System.in);
 		int num = sc.nextInt();
-		
 		return num;
+	}
+	
+	public static ArrayList<Celula> borrarProcariotas (ArrayList<Celula> listaCelulas) {
+		
+		for (int i = 0; i<listaCelulas.size(); i++) {
+			if (listaCelulas.get(i) instanceof Procariota) {
+				listaCelulas.remove(i);
+			}
+		}
+		return listaCelulas;
+	}
+	
+	public static ArrayList<Celula> borrarEucariotas (ArrayList<Celula> listaCelulas) {
+		
+		for (int i = 0; i<listaCelulas.size(); i++) {
+			if (listaCelulas.get(i) instanceof Eucariota) {
+				listaCelulas.remove(i);
+			}
+		}
+		return listaCelulas;
 	}
 
 }
